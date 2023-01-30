@@ -16,7 +16,8 @@ const test = document.querySelector('input').innerHTML;
 console.log(test);
 const submit = document.getElementById('submit');
 submit.addEventListener('cick', () => {
-   fetch(`url/${submit}`)
+   console.log(submit)
+    fetch(`url/${submit}`)
    .then(res => res.json)
    //.then(data => )
 })
