@@ -12,17 +12,22 @@ darkMode.addEventListener('click', () => {
         }
     });
 })
-fetch(`https://api.openweathermap.org/data/2.5/weather?q=phoenix&appid=${API_KEY}`)
+fetch(`https://api.openweathermap.org/data/2.5/weather?q=phoenix&appid=${API_KEY}&units=imperial`)
    .then(res => res.json())
-   .then(data => console.log(data))
+   .then(data => console.log(data.main.temp))
 //need to  be able to grab the input from the search
 const test = document.querySelector('input').value;
 console.log(test);
 const submit = document.getElementById('submit');
+const phoenix = 'phoenix'
+
+
 submit.addEventListener('click', (e) => {
    console.log(e.target.value)
-   console.log(test)
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=phoenix&appid=${API_KEY}`)
+   const temp = document.getElementById('temperature')
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${phoenix}&appid=${API_KEY}`)
    .then(res => res.json())
-   .then(data => console.log(data))
+   .then(data => () => {
+    temp.innerHTML = data.main.temp;
+   })
 })
