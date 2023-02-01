@@ -22,12 +22,11 @@ const submit = document.getElementById('submit');
 const phoenix = 'phoenix'
 
 
-submit.addEventListener('click', (e) => {
-   console.log(e.target.value)
+submit.addEventListener('submit', (e) => {
+    e.preventDefault();
+   console.log(e.target.test.value)
    const temp = document.getElementById('temperature')
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${phoenix}&appid=${API_KEY}`)
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${phoenix}&appid=${API_KEY}&units=imperial`)
    .then(res => res.json())
-   .then(data => () => {
-    temp.innerHTML = data.main.temp;
-   })
+   .then(data => console.log(data))
 })
