@@ -12,9 +12,7 @@ darkMode.addEventListener('click', () => {
         }
     });
 })
-fetch(`https://api.openweathermap.org/data/2.5/weather?q=phoenix&appid=${API_KEY}&units=imperial`)
-   .then(res => res.json())
-   .then(data => console.log(data.main.temp))
+
 //need to  be able to grab the input from the search
 const test = document.querySelector('input').value;
 console.log(test);
@@ -26,11 +24,28 @@ submit.addEventListener('submit', (e) => {
     e.preventDefault();
     const form = document.querySelector('form')
     const city = e.target.test.value
-    const temp = document.getElementById('temperature')
+    
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=imperial`)
    .then(res => res.json())
-   .then(data => console.log(data))
+   .then(data => todo(data))
    form.reset()
 })
+
+function todo(data) {
+    const city = document.getElementById('city');
+    const temp = document.getElementById('temperature');
+    const weather = document.getElementById('weather');
+
+    city.textContent = data.name;
+    temp.textContent = Math.round(data.main.temp)
+    //need to capitalize the first letters of this string ie scattered clouds make Scattered Clouds
+    const lowerCase = data.weather[0].description;
+    const word = lowerCase.split(" ");
+    for (let i = 0; i < word.length; i++) {
+        word[i] = word[i].charAt(0).toUpperCase() + word[i].slice(1);
+    }
+    const words = word.join(" ");
+    weather.innerText = words;
+}
 
 
