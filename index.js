@@ -35,12 +35,18 @@ function todo(data) {
     const city = document.getElementById('city');
     const temp = document.getElementById('temperature');
     const weather = document.getElementById('weather');
-    const icon = document.getElementById('icon')
+    const img = document.createElement('img');
+    const weatherDescr = document.getElementById('weather description');
+    
 
     city.textContent = data.name;
     temp.textContent = Math.round(data.main.temp)
     weather.innerText = capitalizeWords(data.weather[0].description)
-    icon.src = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+    
+    img.src = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
+    img.alt = 'weather icon'
+    weatherDescr.append(img);
+
     
 }
 //need to capitalize the first letters of this string ie scattered clouds make Scattered Clouds
