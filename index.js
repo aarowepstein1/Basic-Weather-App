@@ -38,14 +38,16 @@ function todo(data) {
 
     city.textContent = data.name;
     temp.textContent = Math.round(data.main.temp)
-    //need to capitalize the first letters of this string ie scattered clouds make Scattered Clouds
-    const lowerCase = data.weather[0].description;
-    const word = lowerCase.split(" ");
+    weather.innerText = capitalizeWords(data.weather[0].description)
+}
+//need to capitalize the first letters of this string ie scattered clouds make Scattered Clouds
+function capitalizeWords(string) {
+    const word = string.split(" ");
     for (let i = 0; i < word.length; i++) {
         word[i] = word[i].charAt(0).toUpperCase() + word[i].slice(1);
     }
     const words = word.join(" ");
-    weather.innerText = words;
+    return words;
 }
 
 
