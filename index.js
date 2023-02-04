@@ -1,10 +1,12 @@
 import {API_KEY} from "../config.js";
 
 const darkMode = document.getElementById('dark');
+const body = document.querySelector('body');
 const lights = Array.from(document.getElementsByClassName('light'));
 
 darkMode.addEventListener('click', () => {
     lights.forEach((light) => {
+        body.toggleAttribute('dark')
         if(light.className === "light"){
             light.className = "dark";
         } else{
@@ -14,21 +16,19 @@ darkMode.addEventListener('click', () => {
 })
 
 //need to  be able to grab the input from the search
-const test = document.querySelector('input').value;
-console.log(test);
 const submit = document.getElementById('submit');
-
+const wind = document.getElementById('wind')
 
 
 submit.addEventListener('submit', (e) => {
     e.preventDefault();
     const form = document.querySelector('form')
     const city = e.target.test.value
-    
+    //weather api
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=imperial`)
    .then(res => res.json())
    .then(data => todo(data))
-   form.reset()
+    form.reset()
 })
 
 function todo(data) {
@@ -46,9 +46,17 @@ function todo(data) {
     img.src = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
     img.alt = 'weather icon'
     weatherDescr.append(img);
-
+    
+    wind.addEventListener('click', (data) => {
+        
+    })
     
 }
+
+
+
+
+
 //need to capitalize the first letters of this string ie scattered clouds make Scattered Clouds
 function capitalizeWords(string) {
     const word = string.split(" ");
