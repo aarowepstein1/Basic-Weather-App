@@ -5,10 +5,14 @@ const body = document.querySelector('body');
 const lights = Array.from(document.getElementsByClassName('light'));
 
 darkMode.addEventListener('click', () => {
+    if(body.className === 'normal') {
+        body.className = "dark";
+    } else {
+        body.className = "normal";
+    }
     lights.forEach((light) => {
-        body.toggleAttribute('dark')
         if(light.className === "light"){
-            light.className = "dark";
+            light.className = "test";
         } else{
             light.className = "light";
         }
@@ -17,7 +21,7 @@ darkMode.addEventListener('click', () => {
 
 //need to  be able to grab the input from the search
 const submit = document.getElementById('submit');
-const wind = document.getElementById('wind')
+
 
 
 submit.addEventListener('submit', (e) => {
@@ -37,7 +41,6 @@ function todo(data) {
     const weather = document.getElementById('weather');
     const img = document.createElement('img');
     const weatherDescr = document.getElementById('weather description');
-    
 
     city.textContent = data.name;
     temp.textContent = Math.round(data.main.temp)
@@ -48,12 +51,26 @@ function todo(data) {
     weatherDescr.append(img);
     
     wind.addEventListener('click', (data) => {
-        
+        const speed = document.getElementById('speed');
+        speed.textContent = data.wind.speed;
     })
     
 }
 
+function convertUnix(unix) {
+    let unixTimestamp = unix;
 
+    let date = new Date(unixTimestamp * 1000);
+    
+    let hours = date.getHours();
+    
+    let minutes = "0" + date.getMinutes();
+    
+    let seconds = "0" + date.getSeconds();
+
+    let formatTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+    console.log(formatTime);
+}
 
 
 

@@ -1,8 +1,9 @@
 .dark {
-    background-color: black;
+    background-color: #243E36;
     color: white;
     transition: 1s;
 }
+
 .light {
     background-color: chartreuse;
     color: black;
@@ -17,4 +18,13 @@
 
 #result {
     text-align: center;
+}
+
+.normal {
+    background-color: #C3D2D5;
+    transition: 1s;
+}
+
+.test {
+    background-color: #547AA5;
 }
