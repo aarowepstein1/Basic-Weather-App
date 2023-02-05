@@ -4,8 +4,10 @@ const darkMode = document.getElementById('dark');
 const body = document.querySelector('body');
 const lights = Array.from(document.getElementsByClassName('light'));
 
+console.log(darkMode.src)
 darkMode.addEventListener('click', () => {
-    if(body.className === 'normal') {
+    
+    if(body.className === "normal") {
         body.className = "dark";
     } else {
         body.className = "normal";
@@ -17,11 +19,17 @@ darkMode.addEventListener('click', () => {
             light.className = "light";
         }
     });
+    if(darkMode.className === 'sun') {
+        darkMode.src = "Sources/Mr2MLY01.svg";
+        darkMode.className = 'moon';
+    } else {
+        darkMode.src = "Sources/8rEhad01.svg";
+        darkMode.className = 'sun';
+    }
 })
 
 //need to  be able to grab the input from the search
 const submit = document.getElementById('submit');
-
 
 
 submit.addEventListener('submit', (e) => {
@@ -41,7 +49,6 @@ function todo(data) {
     const weather = document.getElementById('weather');
     const img = document.createElement('img');
     const weatherDescr = document.getElementById('weather description');
-    
 
 
     //This is the main part of the return
@@ -52,7 +59,6 @@ function todo(data) {
     img.src = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
     img.alt = 'weather icon'
     weatherDescr.append(img);
-    
 
 
     // this is for the more information event listener
@@ -62,10 +68,10 @@ function todo(data) {
     const sunrise = document.getElementById('sunrise');
     const sunset = document.getElementById('sunset');
     
-    speed.textContent = `${data.wind.speed} MPH`;
-    direction.textContent = `Direction: ${degToCompass(data.wind.deg)}`
-    sunrise.textContent = `${convertUnix(data.sys.sunrise)} AM`;
-    sunset.textContent = `${convertUnix(data.sys.sunset)} PM`;    
+    speed.textContent = `Wind Speed: ${data.wind.speed} MPH`;
+    direction.textContent = `Wind Direction: ${degToCompass(data.wind.deg)}`
+    sunrise.textContent = `Sunrise: ${convertUnix(data.sys.sunrise)} AM`;
+    sunset.textContent = `Sunset: ${convertUnix(data.sys.sunset)} PM`;    
 
     wind.addEventListener('click', () => {
         if(moreInfo.style.display === 'block') {
@@ -76,6 +82,7 @@ function todo(data) {
     })
     
 }
+
 
 function convertUnix(unix) {
     const unixTimestamp = unix;
@@ -93,7 +100,6 @@ function convertUnix(unix) {
 }
 
 
-
 //need to capitalize the first letters of this string ie scattered clouds make Scattered Clouds
 function capitalizeWords(string) {
     const word = string.split(" ");
@@ -106,6 +112,8 @@ function capitalizeWords(string) {
     return words;
 }
 
+
+//this converts the degrees to a cardinal direction
 function degToCompass(num) {
     const dir = parseInt((num/22.5) + .5)
     const arr = ["N","NNE","NE","ENE","E","ESE", "SE", "SSE","S","SSW","SW","WSW","W","WNW","NW","NNW"]

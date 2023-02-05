@@ -11,7 +11,7 @@
 <body class="normal">
     <div id="header", class="light">
         <h1>Welcome to Basic Weather</h1>
-        <button id="dark">Dark/Light</button>
+        <img src="Sources/8rEhad01.svg" id="dark" class="sun">
     </div>
 
     <div id = "search" class="light">
@@ -22,17 +22,22 @@
     </div>
 
     <div id="result" class="light">
-        <h1 id="city">    </h1>
+        <h1 id="city"></h1>
         <p id="temperature"></p>
         <div id="weather description">
             <p id="weather"></p>
         </div>
-        <button id="wind">more information</button>
+
+        <button id="wind">More Information</button>
         <div id="moreInfo" hidden>
-            <p id="speed"></p>
-            <p id="direction"></p>
-            <p id="sunrise"></p>
-            <p id="sunset"></p>
+            <div class="wind">
+                <p id="speed"></p>
+                <p id="direction"></p>
+            </div>
+            <div class="sun">
+                <p id="sunrise"></p>
+                <p id="sunset"></p>
+            </div>
         </div>
     </div>
 
