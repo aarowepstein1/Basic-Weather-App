@@ -41,7 +41,10 @@ function todo(data) {
     const weather = document.getElementById('weather');
     const img = document.createElement('img');
     const weatherDescr = document.getElementById('weather description');
+    
 
+
+    //This is the main part of the return
     city.textContent = data.name;
     temp.textContent = Math.round(data.main.temp)
     weather.innerText = capitalizeWords(data.weather[0].description)
@@ -50,26 +53,43 @@ function todo(data) {
     img.alt = 'weather icon'
     weatherDescr.append(img);
     
-    wind.addEventListener('click', (data) => {
-        const speed = document.getElementById('speed');
-        speed.textContent = data.wind.speed;
+
+
+    // this is for the more information event listener
+    const moreInfo = document.getElementById('moreInfo');
+    const speed = document.getElementById('speed');
+    const direction = document.getElementById('direction')
+    const sunrise = document.getElementById('sunrise');
+    const sunset = document.getElementById('sunset');
+    
+    speed.textContent = `${data.wind.speed} MPH`;
+    direction.textContent = `Direction: ${degToCompass(data.wind.deg)}`
+    sunrise.textContent = `${convertUnix(data.sys.sunrise)} AM`;
+    sunset.textContent = `${convertUnix(data.sys.sunset)} PM`;    
+
+    wind.addEventListener('click', () => {
+        if(moreInfo.style.display === 'block') {
+            moreInfo.style.display = 'none';
+        } else {
+            moreInfo.style.display = 'block';
+        }
     })
     
 }
 
 function convertUnix(unix) {
-    let unixTimestamp = unix;
-
-    let date = new Date(unixTimestamp * 1000);
-    
+    const unixTimestamp = unix;
+    const date = new Date(unixTimestamp * 1000);
     let hours = date.getHours();
-    
-    let minutes = "0" + date.getMinutes();
-    
-    let seconds = "0" + date.getSeconds();
+    const minutes = "0" + date.getMinutes();
+    const seconds = "0" + date.getSeconds();
 
-    let formatTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
-    console.log(formatTime);
+    if (hours >= 13) {
+       hours = hours - 12;
+    }
+
+    const formatTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+    return formatTime;
 }
 
 
@@ -77,11 +97,18 @@ function convertUnix(unix) {
 //need to capitalize the first letters of this string ie scattered clouds make Scattered Clouds
 function capitalizeWords(string) {
     const word = string.split(" ");
+
     for (let i = 0; i < word.length; i++) {
         word[i] = word[i].charAt(0).toUpperCase() + word[i].slice(1);
     }
+
     const words = word.join(" ");
     return words;
 }
 
+function degToCompass(num) {
+    const dir = parseInt((num/22.5) + .5)
+    const arr = ["N","NNE","NE","ENE","E","ESE", "SE", "SSE","S","SSW","SW","WSW","W","WNW","NW","NNW"]
+    return arr[(dir % 16)];
+}
 
