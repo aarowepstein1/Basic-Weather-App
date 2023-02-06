@@ -52,3 +52,34 @@
     transition: 1s;
     background-color: #70A0AF;
 }
+
+.sun {
+    padding-top: .5px;
+}
+
+#result {
+    margin: auto;
+    width: 50%;
+    width: 400px;
+    height: 500px;    
+}
+
+.moreInfo {
+    column-count: 2;
+    column-fill: balance;
+    column-gap: 10px; 
+}
+
+#search {
+    padding: 10px;
+    width: fit-content;
+}
+
+#header {
+    width: fit-content;
+    margin: auto;
+    width: 50%;
+    text-align: center;
+}
+
+

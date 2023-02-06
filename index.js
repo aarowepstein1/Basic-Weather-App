@@ -42,7 +42,7 @@ submit.addEventListener('submit', (e) => {
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=imperial`)
    .then(res => res.json())
    .then(data => todo(data))
-   .catch(alert('This failed. Please enter a city.'))
+   
    
     form.reset()
 
