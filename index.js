@@ -4,7 +4,7 @@ const darkMode = document.getElementById('dark');
 const body = document.querySelector('body');
 const lights = Array.from(document.getElementsByClassName('light'));
 
-console.log(darkMode.src)
+
 darkMode.addEventListener('click', () => {
     
     if(body.className === "normal") {
@@ -19,46 +19,52 @@ darkMode.addEventListener('click', () => {
             light.className = "light";
         }
     });
-    if(darkMode.className === 'sun') {
+    if(darkMode.className === 'sol') {
         darkMode.src = "Sources/Mr2MLY01.svg";
         darkMode.className = 'moon';
     } else {
         darkMode.src = "Sources/8rEhad01.svg";
-        darkMode.className = 'sun';
+        darkMode.className = 'sol';
     }
 })
 
 //need to  be able to grab the input from the search
 const submit = document.getElementById('submit');
+//
 
 
 submit.addEventListener('submit', (e) => {
     e.preventDefault();
     const form = document.querySelector('form')
     const city = e.target.test.value
+
     //weather api
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=imperial`)
    .then(res => res.json())
    .then(data => todo(data))
+   .catch(alert('This failed. Please enter a city.'))
+   
     form.reset()
+
 })
 
 function todo(data) {
     const city = document.getElementById('city');
     const temp = document.getElementById('temperature');
     const weather = document.getElementById('weather');
-    const img = document.createElement('img');
-    const weatherDescr = document.getElementById('weather description');
+    const img = document.getElementById('icon');
+    
 
 
     //This is the main part of the return
     city.textContent = data.name;
-    temp.textContent = Math.round(data.main.temp)
+    temp.textContent = `${Math.round(data.main.temp)} F`
     weather.innerText = capitalizeWords(data.weather[0].description)
+    
     
     img.src = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
     img.alt = 'weather icon'
-    weatherDescr.append(img);
+    
 
 
     // this is for the more information event listener
