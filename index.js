@@ -79,7 +79,7 @@ function todo(data) {
     sunrise.textContent = `Sunrise: ${convertUnix(data.sys.sunrise)} AM`;
     sunset.textContent = `Sunset: ${convertUnix(data.sys.sunset)} PM`;    
 
-    wind.addEventListener('click', () => {
+    wind.addEventListener('mouseover', () => {
         if(moreInfo.style.display === 'block') {
             moreInfo.style.display = 'none';
         } else {

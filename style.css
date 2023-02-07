@@ -84,4 +84,7 @@
     text-align: center;
 }
 
-
+#wind {
+    cursor: default;
+    border: #C3D2D5;
+}
