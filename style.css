@@ -58,13 +58,15 @@
 }
 
 #result {
+    padding: 10px;
     margin: auto;
     width: 50%;
     width: 400px;
-    height: 500px;    
+    
 }
 
 .moreInfo {
+    position: relative;
     column-count: 2;
     column-fill: balance;
     column-gap: 10px; 
